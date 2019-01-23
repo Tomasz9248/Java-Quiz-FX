@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.tomek.javaquiz.controller.MainPaneController">
+   <children>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" HBox.hgrow="ALWAYS">
+         <children>
+            <fx:include fx:id="contentPane" source="ContentPane.fxml" VBox.vgrow="ALWAYS" />
+            <fx:include fx:id="controlPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" source="ControlPane.fxml" VBox.vgrow="NEVER" />
+         </children>
+      </VBox>
+      <fx:include fx:id="scorePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" source="ScorePane.fxml" HBox.hgrow="NEVER" />
+   </children>
+</HBox>
