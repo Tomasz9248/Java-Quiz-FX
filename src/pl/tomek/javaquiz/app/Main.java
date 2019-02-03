@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		String appName = "JavaQuiz v0.2";
+		String appName = "JavaQuiz v0.3";
 		
 		Parent parent = (Parent) FXMLLoader.load(getClass().getResource("/pl/tomek/javaquiz/view/MainPane.fxml"));
 		Scene scene = new Scene(parent);

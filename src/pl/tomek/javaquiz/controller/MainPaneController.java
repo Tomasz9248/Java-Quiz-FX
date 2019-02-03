@@ -14,8 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import pl.tomek.javaquiz.quiz.Question;
-import pl.tomek.javaquiz.quiz.QuestionsBase;
+import pl.tomek.javaquiz.model.Question;
+import pl.tomek.javaquiz.model.QuestionsBase;
 
 public class MainPaneController implements Initializable {
 
@@ -31,7 +31,6 @@ public class MainPaneController implements Initializable {
 	private QuestionsBase qb;
 	private Question question;
 	private List<Button> buttonList;
-
 	private Label qLabel;
 	private Label scoreLabel;
 
@@ -39,16 +38,14 @@ public class MainPaneController implements Initializable {
 	private static int score = 0;
 	private static int questionNo = 0;
 
-	String hitCorrect = ("C:\\true.mp3");
-	String hitWrong = ("C:\\wrong.mp3");
+	String hitCorrect = ("resources/correct.mp3");
+	String hitWrong = ("resources/wrong.mp3");
 	Media soundCorrect = new Media(new File(hitCorrect).toURI().toString());
 	Media soundWrong = new Media(new File(hitWrong).toURI().toString());
 	MediaPlayer mediaPlayer;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("MAIN initialize");
-
 		initializeLibrary();
 		setQuestion();
 		setUpButtons();
@@ -57,7 +54,6 @@ public class MainPaneController implements Initializable {
 	public void initializeLibrary() {
 		try {
 			qb = new QuestionsBase().loadDatabase();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,7 +67,6 @@ public class MainPaneController implements Initializable {
 
 	public boolean validateAnswer() {
 		return (answer.equals(question.getCorrectAnswer()));
-
 	}
 
 	public void nextQuestion() {
@@ -86,7 +81,7 @@ public class MainPaneController implements Initializable {
 			playWrong();
 			setQuestion();
 			setUpButtons();
-			} else {
+		} else {
 			qLabel.setText("Twój wynik to: " + score + "/10");
 		}
 	}
@@ -97,52 +92,26 @@ public class MainPaneController implements Initializable {
 	}
 
 	private void setUpButtons() {
-		Button buttonA = controlPaneController.getButtonA();
-		Button buttonB = controlPaneController.getButtonB();
-		Button buttonC = controlPaneController.getButtonC();
-		Button buttonD = controlPaneController.getButtonD();
-
 		buttonList = controlPaneController.getButtonList();
 		Collections.shuffle(buttonList);
-
 		int index = 0;
 		for (Button button : buttonList) {
 			button.setText(question.getAnswer(index));
 			index++;
 		}
+		for (Button button : buttonList) {
+			getAnswer(button);
+		}
+	}
 
-		buttonA.setOnAction(new EventHandler<ActionEvent>() {
+	private void getAnswer(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				answer = buttonA.getText();
+				answer = button.getText();
 				nextQuestion();
 			}
 		});
-
-		buttonB.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				answer = buttonB.getText();
-				nextQuestion();
-			}
-		});
-
-		buttonC.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				answer = buttonC.getText();
-				nextQuestion();
-			}
-		});
-
-		buttonD.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				answer = buttonD.getText();
-				nextQuestion();
-			}
-		});
-
 	}
 
 	private void playCorrect() {

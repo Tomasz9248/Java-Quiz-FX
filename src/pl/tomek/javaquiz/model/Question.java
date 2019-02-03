@@ -1,4 +1,4 @@
-package pl.tomek.javaquiz.quiz;
+package pl.tomek.javaquiz.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -29,6 +29,4 @@ public class Question implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-
 }
