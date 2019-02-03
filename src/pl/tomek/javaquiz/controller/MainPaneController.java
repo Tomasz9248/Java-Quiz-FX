@@ -73,7 +73,7 @@ public class MainPaneController implements Initializable {
 		questionNo++;
 		if (validateAnswer() && questionNo < 10) {
 			playCorrect();
-			score = score + 1;
+			score += 1;
 			setLabel();
 			setQuestion();
 			setUpButtons();
@@ -81,7 +81,13 @@ public class MainPaneController implements Initializable {
 			playWrong();
 			setQuestion();
 			setUpButtons();
+		} else if (validateAnswer()){
+			playCorrect();
+			score += 1;
+			setLabel();
+			qLabel.setText("Twój wynik to: " + score + "/10");
 		} else {
+			playWrong();
 			qLabel.setText("Twój wynik to: " + score + "/10");
 		}
 	}
